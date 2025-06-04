@@ -36,30 +36,31 @@ const OrderSummary = () => {
 
   const createOrder = async () => {
     try{
-      if (!selectedAddress) {
-        return toast.error("Please enter a valid address");
-      }
-      let cartItemsArray= Object.keys(cartItems).map((key)=>({product:key, quantity:cartItems[key]}))
-      cartItemsArray= cartItemsArray.filter(item=>item.quantity>0)
 
-      if (cartItemsArray.length === 0){
-        return toast.error("Cart is empty!");
+      if(!selectedAddress){
+        return toast.error("Please enter a valid address")
       }
-      const  token = await getToken()
-      const {data} = await axios.post('/api/order/create', {
-        adress: selectedAddress._id,
-        items: cartItemsArray,
+      let cartItemsArray=Object.keys(cartItems).map((key)=>({product:key,quantity:cartItems[key]}))
+      cartItemsArray=cartItemsArray.filter((item)=>item.quantity>0)
+
+      if(cartItemsArray.length === 0){
+        return toast.error("cart is empty")
+      }
+      const token = await getToken()
+      const {data}= await axios.post('/api/order/create', {
+        address: selectedAddress._id,
+        items: cartItemsArray
       },{
         headers:{Authorization: `Bearer ${token}`}
       })
-      if (data.success) {
+      if(data.success){
         toast.success(data.message)
         setCartItems({})
         router.push('/order-placed')
-      }else{
+      } else{
         toast.error(data.message)
       }
-    }catch(error){
+    }catch (error){
       toast.error(error.message)
     }
   }
