@@ -7,13 +7,14 @@ import {useAppContext} from "@/context/AppContext";
 import {products} from "@/assets/productData";
 import axios from "axios";
 import toast from "react-hot-toast";
+import Footer from "@/components/Footer";
 
 const AddProduct = () => {
   const { getToken } = useAppContext();
   const [files, setFiles] = useState([]);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [category, setCategory] = useState('Earphone');
+  const [category, setCategory] = useState('Sunglasses');
   const [price, setPrice] = useState('');
   const [offerPrice, setOfferPrice] = useState('');
 
@@ -38,7 +39,7 @@ const AddProduct = () => {
         setFiles([]);
         setName('')
         setDescription('')
-        setCategory('Earphone')
+        setCategory('Sunglasses')
         setPrice('')
         setOfferPrice('')
       } else {
@@ -119,18 +120,14 @@ const AddProduct = () => {
               onChange={(e) => setCategory(e.target.value)}
               defaultValue={category}
             >
-              <option value="Earphone">Earphone</option>
-              <option value="Headphone">Headphone</option>
-              <option value="Watch">Watch</option>
-              <option value="Smartphone">Smartphone</option>
-              <option value="Laptop">Laptop</option>
-              <option value="Camera">Camera</option>
+              <option value="Earphone">Sunglasses</option>
+              <option value="Headphone">Eyewear</option>
               <option value="Accessories">Accessories</option>
             </select>
           </div>
           <div className="flex flex-col gap-1 w-32">
             <label className="text-base font-medium" htmlFor="product-price">
-              Product Price
+              Price
             </label>
             <input
               id="product-price"
@@ -144,7 +141,7 @@ const AddProduct = () => {
           </div>
           <div className="flex flex-col gap-1 w-32">
             <label className="text-base font-medium" htmlFor="offer-price">
-              Offer Price
+              Promotion Price
             </label>
             <input
               id="offer-price"
@@ -161,7 +158,7 @@ const AddProduct = () => {
           ADD
         </button>
       </form>
-      {/* <Footer /> */}
+       {/*<Footer />*/}
     </div>
   );
 };

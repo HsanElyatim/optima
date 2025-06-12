@@ -7,6 +7,7 @@ import Footer from "@/components/seller/Footer";
 import Loading from "@/components/Loading";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { Pencil } from 'lucide-react';
 
 const ProductList = () => {
 
@@ -72,14 +73,21 @@ const ProductList = () => {
                   <td className="px-4 py-3 max-sm:hidden">{product.category}</td>
                   <td className="px-4 py-3">${product.offerPrice}</td>
                   <td className="px-4 py-3 max-sm:hidden">
-                    <button onClick={() => router.push(`/product/${product._id}`)} className="flex items-center gap-1 px-1.5 md:px-3.5 py-2 bg-orange-600 text-white rounded-md">
-                      <span className="hidden md:block">Visit</span>
-                      <Image
-                        className="h-3.5"
-                        src={assets.redirect_icon}
-                        alt="redirect_icon"
-                      />
-                    </button>
+                    <div className='flex flex-row gap-1'>
+                      <button onClick={() => router.push(`/seller/product/edit/${product._id}`)}  className="flex items-center gap-1 px-1.5 md:px-3.5 py-2 bg-yellow-400 text-white rounded-md">
+                        <Pencil className="h-4 w-4" />
+                        <span className="hidden md:block">Edit</span>
+                      </button>
+
+                      <button onClick={() => router.push(`/product/${product._id}`)} className="flex items-center gap-1 px-1.5 md:px-3.5 py-2 bg-orange-600 text-white rounded-md">
+                        <Image
+                            className="h-3.5"
+                            src={assets.redirect_icon}
+                            alt="redirect_icon"
+                        />
+                        <span className="hidden md:block">Visit</span>
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
