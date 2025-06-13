@@ -9,6 +9,8 @@ const ProductSchema = new mongoose.Schema({
     image: { type: Array, required: true },
     category: { type: String, required: true },
     date: { type: Number, required: true },
+    stock: { type: Number, default: 0 },
+    isActive: { type: Boolean, default: false },
 });
 
 const Product = mongoose.models.Product || mongoose.model('Product', ProductSchema);

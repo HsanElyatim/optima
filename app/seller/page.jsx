@@ -17,6 +17,8 @@ const AddProduct = () => {
   const [category, setCategory] = useState('Sunglasses');
   const [price, setPrice] = useState('');
   const [offerPrice, setOfferPrice] = useState('');
+  const [stock, setStock] = useState('');
+  const [isActive, setIsActive] = useState(true);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,6 +28,8 @@ const AddProduct = () => {
     formData.append('category', category);
     formData.append('price', price);
     formData.append('offerPrice', offerPrice);
+    formData.append('stock', stock);
+    formData.append('isActive', isActive);
 
     for (let i = 0; i < files.length; i++) {
       formData.append('images', files[i]);
@@ -154,6 +158,38 @@ const AddProduct = () => {
             />
           </div>
         </div>
+
+        <div className="flex items-center gap-5 flex-wrap">
+          <div className="flex flex-col gap-1 w-32">
+            <label className="text-base font-medium" htmlFor="stock">Stock</label>
+            <input
+                id="stock"
+                type="number"
+                placeholder="0"
+                className="outline-none md:py-2.5 py-2 px-3 rounded border border-gray-500/40"
+                onChange={(e) => setStock(e.target.value)}
+                value={stock}
+                required
+            />
+          </div>
+
+          <div className="flex items-center gap-3 mt-2">
+            <label htmlFor="isActive" className="text-sm font-medium">Active</label>
+            <label className="relative inline-flex items-center cursor-pointer">
+              <input
+                  type="checkbox"
+                  id="isActive"
+                  className="sr-only peer"
+                  checked={isActive}
+                  onChange={() => setIsActive(!isActive)}
+              />
+              <div className="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:bg-green-500 transition-colors duration-200"></div>
+              <div className="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-200 peer-checked:translate-x-5"></div>
+            </label>
+          </div>
+        </div>
+
+
         <button type="submit" className="px-8 py-2.5 bg-orange-600 text-white font-medium rounded">
           ADD
         </button>

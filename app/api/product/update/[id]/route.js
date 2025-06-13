@@ -30,6 +30,10 @@ export async function PATCH(request, { params }) {
         const price = formData.get('price');
         const offerPrice = formData.get('offerPrice');
         const files = formData.getAll('images'); // File objects
+        const existingImagesRaw = formData.get('existingImages');
+        const existingImages = existingImagesRaw ? JSON.parse(existingImagesRaw) : [];
+        const stock = formData.get('stock');
+        const isActive = formData.get('isActive') === 'true'; // convert from string
 
         await connectDB();
 
@@ -60,7 +64,9 @@ export async function PATCH(request, { params }) {
         product.category = category;
         product.price = price;
         product.offerPrice = offerPrice;
-        product.images = [...product.image, ...newImageUrls]; // merge
+        product.image = [...existingImages, ...newImageUrls];
+        product.stock = stock;
+        product.isActive = isActive;
 
         await product.save();
 

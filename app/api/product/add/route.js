@@ -29,6 +29,8 @@ export async function POST(request) {
         const price = formData.get('price')
         const offerPrice = formData.get('offerPrice')
         const files = formData.getAll('images')
+        const stock = formData.get('stock');
+        const isActive = formData.get('isActive') === 'true';
 
         if (!files || files.length === 0) {
             return NextResponse.json({ success: false, message: "No files uploaded" });
@@ -67,6 +69,8 @@ export async function POST(request) {
             offerPrice: Number(offerPrice),
             image,
             date: Date.now(),
+            stock,
+            isActive,
         })
         console.log(newProduct);
         return NextResponse.json({ success: true, message: "Upload successful", newProduct });
